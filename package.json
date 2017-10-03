@@ -1,0 +1,26 @@
+{
+	"name": "hello-world-react",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "webpack-dev-server",
+		"build": "webpack"
+	},
+	"dependencies": {
+		"html-webpack-plugin": "^2.26.0",
+		"react": "^15.4.2",
+		"react-dom": "^15.4.2",
+		"webpack": "^1.14.0",
+		"webpack-dev-server": "^1.16.2"
+	},
+	"devDependencies": {
+		"babel-core": "^6.21.0",
+		"babel-loader": "^6.2.10",
+		"babel-preset-env": "^1.6.0",
+		"babel-preset-react": "^6.16.0",
+		"css-loader": "^0.28.7",
+		"extract-text-webpack-plugin": "^2.1.2",
+		"style-loader": "^0.16.1"
+	}
+}

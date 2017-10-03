@@ -1,4 +1,2 @@
-# geolocation-game
-web-based geolocation game inspired by Swarm
-
-blah
+# react barebones
+barebones react skin
