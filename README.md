@@ -1,2 +1,3 @@
-# react barebones
-barebones react skin
+# This Patchwork Quilt
+
+A webgame based around geolocation and community.
