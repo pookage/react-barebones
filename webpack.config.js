@@ -40,7 +40,7 @@ function buildConfig(env, args){
 				devtool: 'inline-source-map',
 				devServer: {
 					contentBase: "./dist",
-					https: false
+					https: true
 				}
 			};
 			break;
@@ -52,6 +52,7 @@ function buildConfig(env, args){
 
 		//required config options
 		//-------------------------------
+		// entry: ["@babel/polyfill", `${src}/index.js`], //used for async/await but increases bundle size by 80kb
 		entry: `${src}/index.js`,
 		output: {
 			filename: "bundle.js",
@@ -62,7 +63,18 @@ function buildConfig(env, args){
 				{
 					test: /\.(js|jsx)$/,
 					exclude: /node_modules/,
-					use: [ "babel-loader" ]
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: [
+								"@babel/preset-env",
+								"@babel/preset-react"
+							],
+							plugins: [
+								"@babel/plugin-proposal-throw-expressions"
+							]
+						}
+					},
 				},
 				{
 					test: /\.css$/,
