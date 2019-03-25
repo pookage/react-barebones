@@ -4,9 +4,9 @@ My kinda dev environment <3
 
 ## Core Libraries
 
-- **Webpack** _v4.25.1_
-- **Babel** _v7.1.5_
-- **React** _v16.6.1_
+- **Webpack** _v4.29.6_
+- **Babel** _v7.4.0_
+- **React** _v16.8.5_
 
 ## Features
 
@@ -14,6 +14,7 @@ My kinda dev environment <3
 - `build-dev` and `build-prod` commands for development and deployment
 - CDNs to keep bundle size down
 - CSS modules
+- React hooks
 
 ## Missing features to be added later
 

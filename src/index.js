@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "Components/App/App.jsx";
+import Hello from "Components/Hello/Hello.jsx";
 
 window.addEventListener("DOMContentLoaded", init);
 
 function init(){
 	ReactDOM.render(
-		<App />,
+		<Hello />,
 		document.getElementById("app")
 	);
 }

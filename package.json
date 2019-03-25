@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pookage/this-patchwork-quilt.git"
+    "url": "git+https://github.com/pookage/react-barebones.git"
   },
   "author": "Pookage Hayes",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pookage/this-patchwork-quilt/issues"
+    "url": "https://github.com/pookage/react-barebones/issues"
   },
-  "homepage": "https://github.com/pookage/this-patchwork-quilt#readme",
+  "homepage": "https://github.com/pookage/react-barebones#readme",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -25,11 +25,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.1.5",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.0.5",
     "babel-runtime": "^6.26.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.1",
@@ -38,12 +38,13 @@
     "html-webpack-plugin": "^3.2.0",
     "module-to-cdn": "^3.1.2",
     "style-loader": "^0.23.1",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14"
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1"
+    "npm": "^6.9.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
   }
 }
