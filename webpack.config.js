@@ -46,7 +46,8 @@ function buildConfig(env, args){
 				],
 				devServer: {
 					contentBase: "./dist",
-					https: true
+					https: true,
+					historyApiFallback: true
 				}
 			};
 			break;
@@ -62,7 +63,8 @@ function buildConfig(env, args){
 		entry: `${src}/index.js`,
 		output: {
 			filename: "bundle.js",
-			path: dist
+			path: dist,
+			publicPath: "/"
 		},
 		module: {
 			rules: [
@@ -73,7 +75,15 @@ function buildConfig(env, args){
 						loader: "babel-loader",
 						options: {
 							presets: [
-								"@babel/preset-env",
+								[
+									"@babel/preset-env", {
+										"targets": {
+											browsers: [
+												"> 2%, not dead"
+											]
+										}
+									},
+								],
 								"@babel/preset-react"
 							],
 							plugins: [
@@ -91,7 +101,8 @@ function buildConfig(env, args){
 							loader: "css-loader",
 							options: {
 								modules: true,
-								localIdentName: "[name]__[local]"
+								localIdentName: "[name]__[local]",
+								url: false
 							}
 						}
 					]	
@@ -112,7 +123,8 @@ function buildConfig(env, args){
 		resolve: {
 			alias: {
 				Assets: assets,
-				Components: `${src}/components`
+				Components: `${src}/components`,
+				Contexts: `${src}/contexts`
 			}
 		},
 
