@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "Components/Hello/Hello.css";
+import s from "Components/Hello/Hello.scss";
 
 export default function Hello(){
 
@@ -38,9 +38,11 @@ export default function Hello(){
 	//display the currently active greeting and change it on click
 	return(
 		<p 
-			className={s.world}
+			className={s.wrapper}
 			onClick={selectNewGreeting}>
-			{activeGreeting}
+			<span className={s.container}>
+				{activeGreeting}
+			</span>
 		</p>
 	);
 

@@ -6,7 +6,6 @@ const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 //folders
 const src    = path.resolve(__dirname, "src");
 const dist   = path.resolve(__dirname, "dist");
-const assets = path.resolve(__dirname, "assets");
 
 function buildConfig(env, args){
 
@@ -108,6 +107,25 @@ function buildConfig(env, args){
 					]	
 				},
 				{
+					test: /\.scss$/,
+					use: [
+						{
+							loader: "style-loader"
+						}, 
+						{
+							loader: "css-loader",
+							options: {
+								modules: true,
+								localIdentName: "[name]__[local]",
+								url: false
+							}
+						},
+						{
+							loader: "sass-loader"
+						}
+					]
+				},
+				{
 					test: /\.(png|svg|jpg)$/,
 					use: [
 						{
@@ -122,7 +140,6 @@ function buildConfig(env, args){
 		},
 		resolve: {
 			alias: {
-				Assets: assets,
 				Components: `${src}/components`,
 				Contexts: `${src}/contexts`
 			}

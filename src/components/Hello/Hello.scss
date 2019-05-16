@@ -5,6 +5,8 @@
 	box-sizing: border-box;
 }
 
-.world {
-	color: red;
+.wrapper {
+	.container {
+		color: red;
+	}
 }
