@@ -63,7 +63,7 @@ function buildConfig(env, args){
 		output: {
 			filename: "bundle.js",
 			path: dist,
-			publicPath: "/"
+			publicPath: "./"
 		},
 		module: {
 			rules: [
