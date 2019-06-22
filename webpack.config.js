@@ -74,19 +74,8 @@ function buildConfig(env, args){
 						loader: "babel-loader",
 						options: {
 							presets: [
-								[
-									"@babel/preset-env", {
-										"targets": {
-											browsers: [
-												"> 2%, not dead"
-											]
-										}
-									},
-								],
+								"@babel/preset-env",
 								"@babel/preset-react"
-							],
-							plugins: [
-								"@babel/plugin-proposal-throw-expressions"
 							]
 						}
 					},
@@ -135,7 +124,28 @@ function buildConfig(env, args){
 							}
 						}
 					]
-				}
+				},
+				{
+					test: /\.less$/,
+					use: [
+						{
+							loader: "style-loader"
+						}, 
+						{
+							loader: "css-loader",
+							options: {
+								modules: {
+									localIdentName: "[name]__[local]",
+								},
+								url: false
+							}
+						},
+						{
+							loader: 'less-loader' 
+						}
+					]
+
+				},
 			]
 		},
 		resolve: {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "Components/Hello/Hello.scss";
+import s from "Components/Hello/Hello.less";
 
 export default function Hello(){
 
