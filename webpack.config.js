@@ -45,7 +45,7 @@ function buildConfig(env, args){
 				],
 				devServer: {
 					contentBase: "./dist",
-					https: true,
+					https: false,
 					historyApiFallback: true
 				}
 			};
