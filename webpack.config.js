@@ -17,6 +17,11 @@ function buildConfig(env, args){
 		//...for production...
 		case "production":
 			modeOptions = {
+				output: {
+					filename: "bundle.js",
+					path: dist,
+					publicPath: "./"
+				},
 				plugins: [
 					new HtmlWebpackPlugin({
 						template: `${src}/index.html`,
@@ -33,7 +38,6 @@ function buildConfig(env, args){
 		case "development":
 		default:
 			modeOptions = {
-				mode: "development",
 				devtool: 'inline-source-map',
 				plugins: [
 					new HtmlWebpackPlugin({
@@ -44,7 +48,12 @@ function buildConfig(env, args){
 					contentBase: "./dist",
 					https: false,
 					historyApiFallback: true
-				}
+				},
+				output: {
+					filename: "bundle.js",
+					path: dist,
+					publicPath: "/"
+				},
 			};
 			break;
 	}
@@ -55,12 +64,8 @@ function buildConfig(env, args){
 
 		//required config options
 		//------------------------------
+		mode,
 		entry: `${src}/index.js`,
-		output: {
-			filename: "bundle.js",
-			path: dist,
-			publicPath: "/"
-		},
 		module: {
 			rules: [
 				{
