@@ -9,6 +9,56 @@ const dist   = path.resolve(__dirname, "dist");
 function buildConfig(env, args){
 
 	const { mode } = args;
+	const production = {
+		output: {
+			filename: "bundle.js",
+			path: dist,
+			publicPath: "./"
+		},
+		plugins: [
+			new HtmlWebpackPlugin({
+				template: `${src}/index.html`,
+				minify: {
+					removeComments: true,
+					collapseWhitespace: true
+				}
+			})
+		]
+	};
+	const development = {
+		devtool: 'inline-source-map',
+		plugins: [
+			new HtmlWebpackPlugin({
+				template: `${src}/index.html`
+			})
+		],
+		devServer: {
+			contentBase: "./dist",
+			https: false,
+			historyApiFallback: true
+		},
+		output: {
+			filename: "bundle.js",
+			path: dist,
+			publicPath: "/"
+		},
+	};
+	const styleLoader = {
+		loader: "style-loader",
+		options: {
+			injectType: "singletonStyleTag"
+		}	
+	};
+	const cssLoader = {
+		loader: "css-loader",
+		options: {
+			modules: {
+				localIdentName: "[folder]__[local]",
+			},
+			url: false
+		}
+	};
+
 
 	//build any additional options...
 	let modeOptions;
@@ -16,45 +66,13 @@ function buildConfig(env, args){
 
 		//...for production...
 		case "production":
-			modeOptions = {
-				output: {
-					filename: "bundle.js",
-					path: dist,
-					publicPath: "./"
-				},
-				plugins: [
-					new HtmlWebpackPlugin({
-						template: `${src}/index.html`,
-						minify: {
-							removeComments: true,
-							collapseWhitespace: true
-						}
-					})
-				]
-			}
+			modeOptions = production;
 			break;
 
 		//...for development...
 		case "development":
 		default:
-			modeOptions = {
-				devtool: 'inline-source-map',
-				plugins: [
-					new HtmlWebpackPlugin({
-						template: `${src}/index.html`
-					})
-				],
-				devServer: {
-					contentBase: "./dist",
-					https: false,
-					historyApiFallback: true
-				},
-				output: {
-					filename: "bundle.js",
-					path: dist,
-					publicPath: "/"
-				},
-			};
+			modeOptions = development;
 			break;
 	}
 
@@ -84,37 +102,16 @@ function buildConfig(env, args){
 				{
 					test: /\.css$/,
 					use: [
-						{
-							loader: "style-loader"		
-						}, {
-							loader: "css-loader",
-							options: {
-								modules: {
-									localIdentName: "[folder]__[local]",
-								},
-								url: false
-							}
-						}
+						{ ...styleLoader },
+						{ ...cssLoader }
 					]	
 				},
 				{
 					test: /\.scss$/,
 					use: [
+						{ ...styleLoader },
+						{ ...cssLoader }, 
 						{
-							loader: "style-loader",
-							options: {
-								injectType: "singletonStyleTag"
-							}
-						},
-						{
-							loader: "css-loader",
-							options: {
-								modules: {
-									localIdentName: "[folder]__[local]",
-								},
-								url: false
-							}
-						}, {
 							loader: "sass-loader"
 						}
 					]	

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "./Hello.scss";
+import { s } from "./";
 
 export default function Hello(){
 
