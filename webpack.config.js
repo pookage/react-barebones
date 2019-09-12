@@ -1,7 +1,6 @@
 //dependencies
 const path                    = require("path");
 const HtmlWebpackPlugin       = require('html-webpack-plugin');
-const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 
 //folders
 const src    = path.resolve(__dirname, "src");
@@ -9,15 +8,15 @@ const dist   = path.resolve(__dirname, "dist");
 
 function buildConfig(env, args){
 
-	console.log(env, args);
+	const { mode } = args;
 
 	//build any additional options...
-	let additionalOptions;
-	switch(args.mode){
+	let modeOptions;
+	switch(mode){
 
 		//...for production...
 		case "production":
-			additionalOptions = {
+			modeOptions = {
 				plugins: [
 					new HtmlWebpackPlugin({
 						template: `${src}/index.html`,
@@ -25,8 +24,7 @@ function buildConfig(env, args){
 							removeComments: true,
 							collapseWhitespace: true
 						}
-					}),
-					new DynamicCdnWebpackPlugin()
+					})
 				]
 			}
 			break;
@@ -34,14 +32,13 @@ function buildConfig(env, args){
 		//...for development...
 		case "development":
 		default:
-			additionalOptions = {
+			modeOptions = {
 				mode: "development",
 				devtool: 'inline-source-map',
 				plugins: [
 					new HtmlWebpackPlugin({
 						template: `${src}/index.html`
-					}),
-					new DynamicCdnWebpackPlugin()
+					})
 				],
 				devServer: {
 					contentBase: "./dist",
@@ -57,8 +54,7 @@ function buildConfig(env, args){
 	return {
 
 		//required config options
-		//-------------------------------
-		// entry: ["@babel/polyfill", `${src}/index.js`], //used for async/await but increases bundle size by 80kb
+		//------------------------------
 		entry: `${src}/index.js`,
 		output: {
 			filename: "bundle.js",
@@ -88,8 +84,9 @@ function buildConfig(env, args){
 						}, {
 							loader: "css-loader",
 							options: {
-								modules: true,
-								localIdentName: "[name]__[local]",
+								modules: {
+									localIdentName: "[folder]__[local]",
+								},
 								url: false
 							}
 						}
@@ -99,20 +96,23 @@ function buildConfig(env, args){
 					test: /\.scss$/,
 					use: [
 						{
-							loader: "style-loader"
-						}, 
-						{
-							loader: "css-loader",
+							loader: "style-loader",
 							options: {
-								modules: true,
-								localIdentName: "[name]__[local]",
-								url: false
+								injectType: "singletonStyleTag"
 							}
 						},
 						{
+							loader: "css-loader",
+							options: {
+								modules: {
+									localIdentName: "[folder]__[local]",
+								},
+								url: false
+							}
+						}, {
 							loader: "sass-loader"
 						}
-					]
+					]	
 				},
 				{
 					test: /\.(png|svg|jpg)$/,
@@ -124,40 +124,19 @@ function buildConfig(env, args){
 							}
 						}
 					]
-				},
-				{
-					test: /\.less$/,
-					use: [
-						{
-							loader: "style-loader"
-						}, 
-						{
-							loader: "css-loader",
-							options: {
-								modules: {
-									localIdentName: "[name]__[local]",
-								},
-								url: false
-							}
-						},
-						{
-							loader: 'less-loader' 
-						}
-					]
-
-				},
+				}
 			]
 		},
 		resolve: {
 			alias: {
-				Components: `${src}/components`,
-				Contexts: `${src}/contexts`
+				COMPONENTS: `${src}/components`,
+				SHARED: `${src}/shared`
 			}
 		},
 
 		//optional config options
 		//-------------------------------
-		...additionalOptions
+		...modeOptions
 	}	
 }//buildConfig
 
